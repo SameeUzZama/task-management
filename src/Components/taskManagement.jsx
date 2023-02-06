@@ -14,21 +14,11 @@ const TaskManagement = () => {
     },
     { taskName: "Task 3", description: "Task 3 Description", status: "Done" },
   ]);
+
   const [modalVisibility, setModalVisibility] = useState(false);
   const [currentTask, setCurrentTask] = useState({});
   const [isAdd, setIsAdd] = useState(true);
   const formRef = useRef();
-
-  const handleMove = (task, status) => {
-    setTasks((prevTasks) =>
-      prevTasks.map((t) => {
-        if (t.taskName === task.taskName) {
-          t.status = status;
-        }
-        return t;
-      })
-    );
-  };
 
   const handleUpdate = (task) => {
     setCurrentTask(task);
@@ -93,31 +83,14 @@ const TaskManagement = () => {
       >
         Export to Excel
       </Button>
-      <Table dataSource={tasks} rowKey="taskName">
+      <Table pagination={false} dataSource={tasks} rowKey="taskName">
         <Column title="Task Name" dataIndex="taskName" />
         <Column title="Description" dataIndex="description" />
         <Column title="Status" dataIndex="status" />
         <Column
           title="Action"
-          render={(text, task) => (
+          render={(task) => (
             <>
-              <Button type="primary" onClick={() => handleMove(task, "To Do")}>
-                To Do
-              </Button>
-              <Button
-                type="primary"
-                onClick={() => handleMove(task, "In Progress")}
-                style={{ marginLeft: 8 }}
-              >
-                In Progress
-              </Button>
-              <Button
-                type="primary"
-                onClick={() => handleMove(task, "Done")}
-                style={{ marginLeft: 8 }}
-              >
-                Done
-              </Button>
               <Button
                 type="primary"
                 onClick={() => handleUpdate(task)}
