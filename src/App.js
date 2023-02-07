@@ -1,10 +1,9 @@
-import "./App.css";
-import TaskManagement from "./Components/taskManagement";
+import Task from "./Components/Task";
 
 function App() {
   return (
     <div className="App">
-      <TaskManagement />
+      <Task />
     </div>
   );
 }
